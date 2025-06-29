@@ -20,6 +20,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Pagination,
+  SortDescriptor,
 } from "@heroui/react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -31,7 +32,7 @@ import { User } from "@/api/user/userTypes";
 
 export const columns = [
   { name: "NAME", uid: "name", sortable: true },
-  { name: "COMPANY", uid: "company", sortable: true },
+  { name: "COMPANY", uid: "company" },
 ];
 
 const INITIAL_COLUMNS = ["name", "company"];
@@ -44,9 +45,10 @@ export const Table = () => {
   const [visibleColumns, setVisibleColumns] = useState<"all" | string[]>(
     INITIAL_COLUMNS,
   );
+
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [sortDescriptor, setSortDescriptor] = useState({
-    column: "age",
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: "name",
     direction: "ascending",
   });
   const [page, setPage] = useState(1);
@@ -84,8 +86,8 @@ export const Table = () => {
 
   const sortedItems = useMemo(() => {
     return [...items].sort((a, b) => {
-      const first = a[sortDescriptor.column];
-      const second = b[sortDescriptor.column];
+      const first = a["name"];
+      const second = b["name"];
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
@@ -159,7 +161,9 @@ export const Table = () => {
                 closeOnSelect={false}
                 selectedKeys={visibleColumns}
                 selectionMode="multiple"
-                onSelectionChange={setVisibleColumns}
+                onSelectionChange={(keys) =>
+                  setVisibleColumns(keys as unknown as string[])
+                }
               >
                 {columns.map((column) => (
                   <DropdownItem key={column.uid} className="capitalize">
