@@ -1,11 +1,13 @@
-import { DefaultLayout } from "@/layouts/default";
+import { Route, Routes } from "react-router-dom";
+
+import { Table } from "./pages/Table";
+import { Graph } from "./pages/Graph";
 
 export const App = () => {
   return (
-    <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        content
-      </section>
-    </DefaultLayout>
+    <Routes>
+      <Route element={<Table />} path="/" />
+      <Route element={<Graph />} path="/graph" />
+    </Routes>
   );
 };
