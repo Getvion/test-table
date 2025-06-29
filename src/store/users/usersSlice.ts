@@ -1,13 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { userRequests } from "@/api/user/userRequests";
-import { Store, UsersSlice } from "@/types/Store";
+import { Store } from "@/types/Store";
+import { User } from "@/api/user/userTypes";
 
 export const getAllUsers = createAsyncThunk("get-all-users", async () =>
   userRequests.getAllUsers(),
 );
 
-const initialState: UsersSlice = {
+export interface UsersState {
+  isError: boolean;
+  isLoading: boolean;
+  usersData: User[];
+}
+
+const initialState: UsersState = {
   isError: false,
   isLoading: false,
   usersData: [],

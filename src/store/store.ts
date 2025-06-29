@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { usersSlice } from "./users/usersSlice";
+import { graphSlice } from "./graph/graphSlice";
 
 export const store = configureStore({
   reducer: {
     users: usersSlice.reducer,
+    graph: graphSlice.reducer,
   },
 });
 

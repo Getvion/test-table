@@ -1,11 +1,7 @@
-import { User } from "@/api/user/userTypes";
-
-export interface UsersSlice {
-  isError: boolean;
-  isLoading: boolean;
-  usersData: User[];
-}
+import { GraphState } from "@/store/graph/graphSlice";
+import { UsersState } from "@/store/users/usersSlice";
 
 export interface Store {
-  users: UsersSlice;
+  users: UsersState;
+  graph: GraphState;
 }
