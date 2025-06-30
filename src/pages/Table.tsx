@@ -249,6 +249,7 @@ export const Table = () => {
       {showContent && (
         <HeroTable
           isCompact
+          isVirtualized
           aria-label="table"
           bottomContent={bottomContent}
           bottomContentPlacement="outside"
